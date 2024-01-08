@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LINE (STUDY) RENDERER</title>
+    <style>
+        /* Add your CSS styling here */
+        body { 
+            background-color: rgb(247, 247, 247); 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+        }
+        .images-container { 
+            width: 100%; 
+            max-width: 1200px; /* Adjust maximum width as needed */
+            padding: 20px; 
+        }
+        img { 
+            max-width: 100%; /* Make image width responsive */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 10px; /* Space between images */
+        }
+    </style>
+</head>
+<body>
+    <div class="images-container" id="images">
+        <!-- Images will be loaded here -->
+    </div>
+
+    <!-- Include Web3.js from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

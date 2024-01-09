@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>LINE (STUDY) RENDERER</title>
     <style>
-        /* Add your CSS styling here */
         body { 
             background-color: rgb(247, 247, 247); 
             margin: 0; 
@@ -14,25 +13,40 @@
             justify-content: center; 
             align-items: center; 
             min-height: 100vh;
+            overflow: hidden; /* Hide overflow */
         }
         .images-container { 
-            width: 100%; 
-            max-width: 600px; /* Adjust maximum width as needed */
-            padding: 20px; 
+            width: 90vw; /* Use vw to keep container responsive */
+            max-width: 600px; /* Max width, but you can adjust this as needed */
+            margin: auto; /* Center the container */
+            position: relative;
+            display: flex; /* Use flex to center the image */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
         }
         img { 
-            max-width: 100%; /* Make image width responsive */
-            height: auto; /* Maintain aspect ratio */
-            margin-bottom: 10px; /* Space between images */
+            max-width: 100%; /* Make the image responsive to the width of its container */
+            max-height: 90vh; /* Make the image responsive to the height of the viewport */
+            object-fit: contain; /* Image will be contained within the element's box */
+            display: block; /* Remove extra space below the image */
+        }
+
+        /* Adjustments for very large screens */
+        @media (min-width: 1200px) {
+            .images-container {
+                width: 90vw; /* Reduce the width on very large screens */
+            }
+            img {
+                max-height: 90vh; /* Reduce the height on very large screens */
+            }
         }
     </style>
 </head>
 <body>
     <div class="images-container" id="images">
-        <!-- Images will be loaded here -->
+        <!-- Images will be dynamically inserted here by the script -->
     </div>
 
-    <!-- Include Web3.js from a CDN -->
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="script.js"></script>
 </body>

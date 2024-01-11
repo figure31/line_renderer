@@ -1,52 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <title>LINE (STUDY) RENDERER</title>
-    <style>
-        body { 
-            background-color: rgb(247, 247, 247); 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh;
-            overflow: hidden; /* Hide overflow */
-        }
-        .images-container { 
-            width: 90vw; /* Use vw to keep container responsive */
-            max-width: 600px; /* Max width, but you can adjust this as needed */
-            margin: auto; /* Center the container */
-            position: relative;
-            display: flex; /* Use flex to center the image */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-        }
-        img { 
-            max-width: 100%; /* Make the image responsive to the width of its container */
-            max-height: 90vh; /* Make the image responsive to the height of the viewport */
-            object-fit: contain; /* Image will be contained within the element's box */
-            display: block; /* Remove extra space below the image */
-        }
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <title>LINE (STUDY) RENDERER</title>
+        <style>
+            /* Base styles for the body */
+            body { 
+                background-color: rgb(247, 247, 247); 
+                margin: 0; 
+                padding: 0; 
+                display: flex; 
+                justify-content: center; 
+                align-items: center; 
+                min-height: 100vh;
+                overflow-x: hidden; /* Hide horizontal scrollbar to prevent shifting */
+            }
+    
+            /* Styles for the image and grid containers */
+            .images-container, #grid { 
+                width: 90vw; /* Use vw for responsive width */
+                max-width: 600px; /* Max width, can be adjusted as needed */
+                margin: auto; /* Center the container */
+                position: relative;
+                display: flex; /* Use flex to center the contents */
+                justify-content: center; /* Center horizontally */
+                align-items: center; /* Center vertically */
+            }
+    
+            /* Styles for images */
+            img { 
+                max-width: 100%; /* Responsive to the width of its container */
+                max-height: 90vh; /* Responsive to the height of the viewport */
+                object-fit: contain; /* Contain the image within its element */
+                display: block; /* Remove extra space below the image */
+            }
+    
+            /* Adjustments for very large screens */
+            @media (min-width: 1200px) {
+                .images-container, #grid {
+                    width: 90vw; /* Adjust the width on very large screens */
+                }
+                img {
+                    max-height: 90vh; /* Adjust the height on very large screens */
+                }
+            }
+    
+            /* Styles for the grid toggle button */
+            #gridToggle {
+                position: fixed;
+                right: 10px;
+                top: 10px;
+                z-index: 10;
+                padding: 5px;
+                cursor: pointer;
+            }
+    
+            /* Styles for the grid */
+            #grid {
+                display: none; /* Initially hide the grid */
+                flex-direction: column-reverse; /* Reverse the row order for correct coordinate system */
+            }
+    
+            /* Styles for grid dots */
+            .grid-dot {
+                font-size: initial; /* Reset font size */
+                width: 20px; /* Width for each dot */
+                height: 20px; /* Height for each dot */
+                margin: 10px; /* Space between dots */
+                text-align: center; /* Center the text (symbols) horizontally */
+                line-height: 20px; /* Center the text (symbols) vertically */
+            }
 
-        /* Adjustments for very large screens */
-        @media (min-width: 1200px) {
-            .images-container {
-                width: 90vw; /* Reduce the width on very large screens */
-            }
-            img {
-                max-height: 90vh; /* Reduce the height on very large screens */
-            }
-        }
-    </style>
-</head>
+            .symbol {
+                font-size: 20px; /* Or any size you prefer */
+                line-height: 1; /* Adjust line height to ensure the symbol aligns correctly */
+}
+        </style>
+    </head>
 <body>
     <div class="images-container" id="images">
         <!-- Images will be dynamically inserted here by the script -->
     </div>
+    <button id="gridToggle">grid</button>
+    <div id="grid">
 
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="script.js"></script>
 </body>

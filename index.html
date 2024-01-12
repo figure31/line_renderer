@@ -3,9 +3,8 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
-        <title>LINE (STUDY) RENDERER</title>
+        <title>LINE (STUDY)</title>
         <style>
-            /* Base styles for the body */
             body { 
                 background-color: rgb(247, 247, 247); 
                 margin: 0; 
@@ -14,39 +13,36 @@
                 justify-content: center; 
                 align-items: center; 
                 min-height: 100vh;
-                overflow-x: hidden; /* Hide horizontal scrollbar to prevent shifting */
+                overflow-x: hidden;
             }
     
-            /* Styles for the image and grid containers */
             .images-container, #grid { 
-                width: 90vw; /* Use vw for responsive width */
-                max-width: 600px; /* Max width, can be adjusted as needed */
-                margin: auto; /* Center the container */
+                width: 90vw; 
+                max-width: 600px;
+                margin: auto; 
                 position: relative;
-                display: flex; /* Use flex to center the contents */
-                justify-content: center; /* Center horizontally */
-                align-items: center; /* Center vertically */
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
     
-            /* Styles for images */
             img { 
-                max-width: 100%; /* Responsive to the width of its container */
-                max-height: 90vh; /* Responsive to the height of the viewport */
-                object-fit: contain; /* Contain the image within its element */
-                display: block; /* Remove extra space below the image */
+                max-width: 100%;
+                max-height: 90vh;
+                object-fit: contain;
+                display: block;
             }
     
             /* Adjustments for very large screens */
             @media (min-width: 1200px) {
                 .images-container, #grid {
-                    width: 90vw; /* Adjust the width on very large screens */
+                    width: 90vw;
                 }
                 img {
-                    max-height: 90vh; /* Adjust the height on very large screens */
+                    max-height: 90vh;
                 }
             }
     
-            /* Styles for the grid toggle button */
             #gridToggle {
                 position: fixed;
                 right: 10px;
@@ -56,36 +52,104 @@
                 cursor: pointer;
             }
     
-            /* Styles for the grid */
             #grid {
-                display: none; /* Initially hide the grid */
-                flex-direction: column-reverse; /* Reverse the row order for correct coordinate system */
+                display: none;
+                flex-direction: column-reverse;
             }
     
-            /* Styles for grid dots */
             .grid-dot {
-                font-size: initial; /* Reset font size */
-                width: 20px; /* Width for each dot */
-                height: 20px; /* Height for each dot */
-                margin: 10px; /* Space between dots */
-                text-align: center; /* Center the text (symbols) horizontally */
-                line-height: 20px; /* Center the text (symbols) vertically */
+                font-size: initial;
+                width: 20px;
+                height: 20px;
+                margin: 10px;
+                text-align: center;
+                line-height: 20px;
             }
 
             .symbol {
-                font-size: 20px; /* Or any size you prefer */
-                line-height: 1; /* Adjust line height to ensure the symbol aligns correctly */
-}
-        </style>
-    </head>
-<body>
-    <div class="images-container" id="images">
-        <!-- Images will be dynamically inserted here by the script -->
-    </div>
-    <button id="gridToggle">grid</button>
-    <div id="grid">
+                font-size: 20px;
+                line-height: 1;
 
-    </div>
+            }
+
+            #infoToggle, #gridtoggle {
+                position: fixed;
+                right: 10px;
+                top: 45px;
+                z-index: 10;
+                padding: 5px;
+                cursor: pointer;
+            }
+
+            @media (max-width: 600px) {
+                #gridToggle {
+                font-size: 8px;
+                padding: 2px 3px;
+                top: 10px;
+                right: 2px;
+                }
+            }
+
+            @media (max-width: 600px) {
+                #infoToggle {
+                font-size: 8px;
+                padding: 2px 3px;
+                top: 30px;
+                right: 2px;
+                }
+            }
+
+
+            #infoText {
+                font-size: 1.5vw;
+                display: none; 
+                width: 60vw;
+                margin: 0px auto;
+                padding: 50px;
+                text-align: left;
+                position: left;
+            }
+
+            @media (max-width: 600px) {
+                #infoText {
+                font-size: 2.5vw; 
+                display: none;  
+                padding: 50px; 
+                text-align: left;
+                position: left;
+                }
+            }
+
+            @media (min-width: 1300px) {
+                #infoText {
+                font-size: 1.25vw; 
+                display: none;  
+                padding: 50px; 
+                text-align: left;
+                position: left;
+                }
+            }
+
+    </style>
+    </head>
+    <body>
+        <div class="images-container" id="images">
+            <!-- Images will be dynamically inserted here by the script -->
+        </div>
+        <button id="gridToggle">grid</button>
+        <button id="infoToggle">info</button>
+        <div id="grid" style="display: none;">
+            <!-- Grid will be dynamically generated by the script -->
+        </div>
+        <div id="infoText" style="display: none; width: 90vw; max-width: 600px; margin: auto;">
+            <p>LINE (STUDY) is a dynamic artwork that relies on a renderer contract to offer its owner multiple compositions. This website displays the latest state of the renderer contract, and the URL is plugged into the NFT’s metadata to circumvent the limitations of Manifold’s standard 1-of-1 contract.</p>
+            <p>The artwork exists on a 5x5 grid. Points on this grid are defined by (x,y) coordinates and associated with images. Images are first hidden, and it’s up to the token’s owner to discover them. The grid can be explored by writing the functions of the renderer contract.</p>
+            <p>There are two points, the origin point and the image point; their current positions are defined by “o” and “x,” respectively. The origin point is an anchor on the grid, and the image point defines the token’s image.</p>
+            <p>The origin point movements are restricted as such: (x+1,y), (x-1,y), (x,y+1), (x,y-1). The most recent origin point coordinates define the image point movement restrictions according to the same rules. To move on the grid, write the correct (x,y) coordinates in the moveOriginPoint and setImagePoint functions of the renderer contract.</p>
+            <p>Coordinates can only be visited once by point type. The contract’s read functions allow the owner to keep track of those visits and the grid button to visualize them. Once coordinates have been visited, their symbols on the grid change to “@” and “#”.</p>
+            <p>Once the origin and image points have visited the same coordinates (“&” symbol), the owner can use the sumUpImages function to create a new landscape with these previously explored coordinates. The grid’s exploration can be resumed at any point.</p>
+            <p>The renderer contract is minted on Optimism Mainnet at the following address: <a href="https://optimistic.etherscan.io/address/0x9c06088a110deceb4fe0fa6698787ff218ca379b#writeContract" target="0x9C06088A110dECEB4FE0FA6698787Ff218ca379B">0x9C06088A110dECEB4FE0FA6698787Ff218ca379B</a>. Only the owner can write the functions. Ownership of this contract will be transferred to the owner of the LINE (STUDY) token.</p>
+        </div>
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="script.js"></script>
 </body>

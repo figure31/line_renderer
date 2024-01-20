@@ -17,11 +17,22 @@ async function loadImages() {
 function displayImages(imageUrls) {
     const container = document.getElementById('images');
     container.innerHTML = '';
-    imageUrls.split(',').forEach(url => {
+    const urls = imageUrls.split(',');
+
+    const maxWidthPercent = 90 / urls.length;
+    urls.forEach(url => {
         const img = document.createElement('img');
         img.src = url;
+        img.style.maxWidth = `${maxWidthPercent}vw`;
+        img.style.height = 'auto';
         container.appendChild(img);
     });
+
+    container.style.display = 'flex';
+    container.style.flexDirection = 'row';
+    container.style.justifyContent = 'center';
+    container.style.alignItems = 'center';
+    container.style.flexWrap = 'nowrap';
 }
 
 function generateGrid() {
